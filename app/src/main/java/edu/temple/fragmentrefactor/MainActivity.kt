@@ -10,8 +10,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        supportFragmentManager.beginTransaction().add(R.id.fragmentContainerView, HelloFragment()).commit()
-
+        if(savedInstanceState == null) {
+            supportFragmentManager.beginTransaction()
+                .add(R.id.fragmentContainerView, HelloFragment()).commit()
+        }
         /*
         val displayTextView = findViewById<TextView>(R.id.displayTextView)
         val nameEditText = findViewById<EditText>(R.id.nameEditText)

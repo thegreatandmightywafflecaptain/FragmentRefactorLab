@@ -10,7 +10,19 @@ import android.widget.EditText
 import android.widget.TextView
 import kotlin.random.Random
 
+const val SAVED_NAME = "SAVED_NAME"
+
 class HelloFragment : Fragment() {
+    private var name = "World"
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        savedInstanceState?.run{
+            name = getString(SAVED_NAME, "World")
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -31,7 +43,16 @@ class HelloFragment : Fragment() {
                 }
             }
 
+            displayTextView.text = "Hello, $name!"
+
         }
+
+    }
+
+    override fun onSaveInstanceState(outState: Bundle){
+        super.onSaveInstanceState(outState)
+
+        outState.putString(SAVED_NAME, name)
 
     }
 }
